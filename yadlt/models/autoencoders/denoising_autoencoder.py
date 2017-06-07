@@ -224,7 +224,7 @@ class DenoisingAutoencoder(UnsupervisedModel):
 
         :return: self
         """
-        if W_:
+        if isinstance(W_, np.ndarray):
             self.W_ = tf.Variable(W_, name='enc-w')
         else:
             self.W_ = tf.Variable(
@@ -232,13 +232,13 @@ class DenoisingAutoencoder(UnsupervisedModel):
                     shape=[n_features, self.n_components], stddev=0.1),
                 name='enc-w')
 
-        if bh_:
+        if isinstance(bh_, np.ndarray):
             self.bh_ = tf.Variable(bh_, name='hidden-bias')
         else:
             self.bh_ = tf.Variable(tf.constant(
                 0.1, shape=[self.n_components]), name='hidden-bias')
 
-        if bv_:
+        if isinstance(bv_, np.ndarray):
             self.bv_ = tf.Variable(bv_, name='visible-bias')
         else:
             self.bv_ = tf.Variable(tf.constant(
